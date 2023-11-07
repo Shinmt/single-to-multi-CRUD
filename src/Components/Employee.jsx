@@ -1,11 +1,14 @@
 import { useState } from "react"
+import { TiUserDeleteOutline } from 'react-icons/ti'
+import { TbUserEdit } from 'react-icons/tb'
+
 /* eslint-disable react/prop-types */
 const Employee = ({employee, handleDelete, handleUpdateForm, checked, handleCheckboxChange}) => {
     const [showDropDown, setShowDropDown] = useState(false) //react နဲ့ ပြန်ချိတ်ထား//
 
     return (
     <>
-    <div className="relative w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
+    <div className="relative w-full max-w-sm bg-white rounded-lg border border-black mx-2 hover:bg-gray-200">
         <input
         type="checkbox"
         name="checked"
@@ -24,34 +27,34 @@ const Employee = ({employee, handleDelete, handleUpdateForm, checked, handleChec
             </button>
 
             <div id="dropdown" 
-            className={ showDropDown ? "absolute top-16 right-0 z-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44" 
+            className={ showDropDown ? "absolute top-16 right-0 z-10 text-base list-none bg-white divide-y divide-black border-black rounded-md shadow w-12" 
             : "hidden"}>
                 <ul className="py-2" aria-labelledby="dropdownButton">
                 <li>
                     <a href="#" 
-                    className="block px-4 py-2 text-sm font-mono text-blue-600 hover:bg-gray-100"
-                    onClick={(e) => handleUpdateForm(e, employee)}>Update</a>
+                    className="block px-4 py-2 text-sm font-mono text-blue-600 hover:bg-blue-300"
+                    onClick={(e) => handleUpdateForm(e, employee)}><TbUserEdit /></a>
                 </li>
                 <li>
                     <a href="#" 
-                    className="block px-4 py-2 text-sm font-mono text-red-600 hover:bg-gray-100"
-                    onClick={(e) => handleDelete(employee.id, e)}>Delete</a>
+                    className="block px-4 py-2 text-sm font-mono text-red-600 hover:bg-red-300"
+                    onClick={(e) => handleDelete(employee.id, e)}><TiUserDeleteOutline /></a>
                 </li>
                 </ul>
             </div>
         </div>
 
         <div className="flex flex-col items-center pb-10">
-        <div className=" flex items-center justify-between mx-auto">
-                <h1 className="text-lg font-semibold text-gray-900 -mt-1"> <span className=" font-mono  ms-1">Name : </span>{employee.name}</h1>
+        <div className=" flex justify-between mx-auto text-center">
+                <h1 className="text-lg font-semibold text-gray-900 -mt-1"> <span className=" font-mono ms-1">Name : </span>{employee.name}</h1>
             </div>
 
             <div className="mt-4 flex items-center mx-auto">
-                <h3 className="text-lg font-semibold text-gray-900 -mt-1"> <span className=" font-mono  ms-1">DoB : </span>{employee.dob}</h3>
+                <h1 className="text-lg font-semibold text-gray-900 text-center overflow-hidden -mt-1"> <span className=" font-mono  ms-1">DoB : </span>{employee.dob}</h1>
             </div>
 
             <div className="mt-4 flex items-center mx-auto">
-            <h4 className="text-lg font-semibold text-gray-900 -mt-1"> <span className=" font-mono ms-1">Job : </span>{employee.job}</h4>
+            <h1 className="text-lg font-semibold text-gray-900 text-center -mt-1"> <span className=" font-mono ms-1">Job : </span>{employee.job}</h1>
             </div>
         </div>
     </div>

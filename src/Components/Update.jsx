@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import axios from "axios"
+import { MdCancelPresentation } from 'react-icons/md'
+import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
 
 const Update = ({updateEmployee, setUpdateEmployee, getEmployee, setShowUpdateForm}) => {
 
@@ -25,42 +27,47 @@ const Update = ({updateEmployee, setUpdateEmployee, getEmployee, setShowUpdateFo
     }
 
   return (
-    <div>
-      <div className="flex flex-col items-center pb-10 mt-3">
-        <div className=" flex items-center justify-between mx-auto">
-          <h1 className="text-lg font-semibold text-gray-900 -mt-1">
-            <span className=" font-mono  ms-1">Name : </span>
+    <div className=" container">
+      <div className=" grid grid-flow-col w-52 mt-2 border border-black rounded-lg mx-4 font-mono text-center">
+      <form 
+        className="space-y-6" 
+        action="#" 
+      >
+        <div>
+          <h1 className="text-lg font-semibold text-gray-900">
+            Name</h1>
             <input 
+            className="text-center rounded-md "
             value={updateEmployee.name} 
             onChange={e => setUpdateEmployee({...updateEmployee, name: e.target.value})}/>
-          </h1>
         </div>
 
-        <div className="mt-4 flex items-center mx-auto">
-          <h3 className="text-lg font-semibold text-gray-900 -mt-1">
-            <span className=" font-mono  ms-1">DoB : </span>
-            <input 
-            value={updateEmployee.dob} 
-            onChange={e => setUpdateEmployee({...updateEmployee, dob: e.target.value})}/>
-            </h3>
+        <div>
+          <h1 className="text-lg font-semibold text-gray-900">
+              DoB</h1>
+              <input 
+              className="text-center rounded-md "
+              value={updateEmployee.dob} 
+              onChange={e => setUpdateEmployee({...updateEmployee, dob: e.target.value})}/>
         </div>
 
-        <div className="mt-4 flex items-center mx-auto">
-          <h4 className="text-lg font-semibold text-gray-900 -mt-1">
-            <span className=" font-mono ms-1">Job : </span>
+        <div>
+        <h1 className="text-lg font-semibold text-gray-900">
+            Job</h1>
             <input 
+            className="text-center rounded-md "
             value={updateEmployee.job} 
             onChange={e => setUpdateEmployee({...updateEmployee, job: e.target.value})}/>
-          </h4>
         </div>
-        <div className=" grid grid-flow-col justify-start font-mono">
-          <button  className="mt-2 mb-2 px-3 py-1 hover:bg-gray-200 rounded-lg bg-red-500 text-white" 
+        <div className=" grid grid-flow-col justify-around font-mono">
+          <button  className="btn text-red-700 hover:bg-red-300 " 
           onClick={(event) => handleCancle(event)}>
-            Cancle</button>
-          <button  className="mt-2 mb-2 px-3 py-1 hover:bg-gray-200 rounded-lg bg-green-500 text-white font-mono ml-3" 
+            <MdCancelPresentation /></button>
+          <button  className="btn text-blue-700 hover:bg-blue-300 " 
           onClick={(event) => handleUpdate(event)}>
-            Update</button>
+            <IoMdCheckmarkCircleOutline /></button>
         </div>
+      </form>
       </div>
     </div>
   )

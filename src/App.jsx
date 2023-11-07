@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import './App.css'
+import {BsPersonAdd, BsFillTrashFill, BsFillPersonCheckFill} from 'react-icons/bs'
 import axios from 'axios'
 import Employee from './Components/Employee'
 import Create from './Components/Create'
 import Update from './Components/Update'
+import BulkUpdate from './Components/BulkUpdate'
 
 function App() {
 
@@ -12,13 +13,16 @@ function App() {
     dob: "",
     job: ""
   }]) // Read Data
-
+  
+  const [showCreate, setShowCreate] = useState(false) // show create form
+  
   const [showUpdateForm, setShowUpdateForm] = useState(false) // initializing don't show update form
   const [updateEmployee, setUpdateEmployee] = useState([]) // update the new information
 
-  const [showCreate, setShowCreate] = useState(false) // show create form
-
   const [checked, setChecked] = useState([]) // click the checkbox
+
+  const [ showBulkUpdateForm, setShowBulkUpdateForm ] = useState(false) // show bulk update form
+  const [ bulkUpdateEmployee, setBulkUpdateEmployee] = useState([]) // update many employees
 
   //Get Data from API
   useEffect(() => {
@@ -38,6 +42,7 @@ function App() {
   function handleAddButton (e) {
     e.preventDefault();
     setShowCreate(true);
+    setShowBulkUpdateForm(false);
   }
 
   function hideCreateForm (e) {
@@ -49,7 +54,8 @@ function App() {
   function handleUpdateForm (e, employee) {
     e.preventDefault()
       setShowUpdateForm(true); //Form while clicking Update button from 3dots
-      setUpdateEmployee(employee) //data from looping
+      setUpdateEmployee(employee); //data from looping
+      setShowBulkUpdateForm(false);
   }
   
   //--!refresh!--//
@@ -62,7 +68,7 @@ function App() {
     .catch(err => console.log(err))
   }
 
-  //Deleted All using checkbox
+  //checkbox
   function handleCheckboxChange(id) {
     if (checked.includes(id)) {
       setChecked(checked.filter((employeeId) => employeeId !== id));
@@ -71,16 +77,17 @@ function App() {
     }
   }
 
+  //Delete all using checkbox ids
   async function handleDeletedAll() {
     if (checked.length === 0) {
       return;
     }
 
-    const promises = checked.map((id) => 
+    const deletePromises = checked.map((id) => 
       axios.delete(`https://651cc91935bd4107e3731d66.mockapi.io/svt/${id}`)
     );
 
-    Promise.all(promises)
+    Promise.all(deletePromises)
     .then(() => {
       getEmployee();
       setChecked([]);
@@ -88,20 +95,51 @@ function App() {
     .catch(err => console.log(err))
   }
 
-  const showCard = !showUpdateForm && !showCreate
-  const showButton = !showUpdateForm && !showCreate
+  //Update all using checkbox ids
+
+  async function handleBulkUpdate(e) {
+
+    if (checked.length === 0) {
+      return;
+    } else {
+      e.preventDefault();
+      setShowBulkUpdateForm(true);
+      setBulkUpdateEmployee(gatherBulkUpdateEmployee())
+    }
+  }
+
+  function gatherBulkUpdateEmployee() {
+    const dataToBulkUpdate = [];
+
+    for (const id of checked) {
+      const employeeData = employees.find((employee) => employee.id === id);
+      if(employeeData) {
+        dataToBulkUpdate.push({
+          id: employeeData.id,
+          name: employeeData.name,
+          dob: employeeData.dob,
+          job: employeeData.job,
+        });
+      }
+    }    
+    return dataToBulkUpdate;
+  }
+
+  const showCard = !showUpdateForm && !showCreate && !showBulkUpdateForm
+  const showButton = !showUpdateForm && !showCreate && !showBulkUpdateForm
 
   return (
-    <>
-      <h1 className=' text-black font-bold text-3xl font-mono mb-4'>Pledis Ent.</h1>
+    <div className='w-full h-full'>
+      <h1 className=' text-black hover:text-zinc-500 font-bold text-3xl font-mono mb-4 text-center items-center'>Pledis Ent.</h1>
       { showButton &&
-       <>
-       <button className="mt-2 mb-2 px-3 py-1 bg-green-500 hover:bg-gray-200 rounded-lg text-white font-mono"
-        onClick={handleAddButton}>Add Employee</button>
-       <button className="mt-2 mb-2 px-3 py-1 bg-red-500 hover:bg-gray-200 rounded-lg text-white font-mono"
-        onClick={handleDeletedAll}>
-          Delete All</button>
-       </>
+        <div className=' flex flex-row justify-center items-center'>
+          <button className=" btn text-green-700 hover:bg-green-300 "
+            onClick={handleAddButton}><BsPersonAdd /></button>
+          <button className=" btn text-red-700 hover:bg-red-300 "
+            onClick={handleDeletedAll}><BsFillTrashFill /></button>
+          <button className=" btn text-blue-700 hover:bg-blue-300 "
+            onClick={handleBulkUpdate}><BsFillPersonCheckFill /></button>
+        </div>
       }
 
         { showCreate &&
@@ -136,8 +174,16 @@ function App() {
       setShowUpdateForm={setShowUpdateForm}/>
       }
 
+      { showBulkUpdateForm && <BulkUpdate 
+      bulkUpdateEmployee={bulkUpdateEmployee}
+      setBulkUpdateEmployee={setBulkUpdateEmployee}
+      checked={checked}
+      getEmployee={getEmployee}
+      setShowBulkUpdateForm={setShowBulkUpdateForm}
+      />
+      }
       
-    </>
+    </div>
   )
 }
 
