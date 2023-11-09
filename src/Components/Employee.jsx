@@ -45,7 +45,7 @@ const Employee = ({employee, handleDelete, handleUpdateForm, checked, handleChec
         </div>
 
         <div className="flex flex-col items-center pb-10">
-        <div className=" flex justify-between mx-auto text-center">
+            <div className=" flex justify-between mx-auto text-center">
                 <h1 className="text-lg font-semibold text-gray-900 -mt-1"> <span className=" font-mono ms-1">Name : </span>{employee.name}</h1>
             </div>
 

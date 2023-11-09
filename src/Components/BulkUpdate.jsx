@@ -58,8 +58,9 @@ const BulkUpdate = ({ bulkUpdateEmployee, setBulkUpdateEmployee, checked, getEmp
             </button>
         </div>
     </div>
-    { Array.from({length: checked.length}, (_, index) => (
 
+    { Array.from({length: checked.length}, (_, index) => (
+        
         <div key={index}
         className=" flex flex-col justify-center items-center">
         <div
@@ -112,7 +113,7 @@ const BulkUpdate = ({ bulkUpdateEmployee, setBulkUpdateEmployee, checked, getEmp
         </div>
         </div>
     )) 
-    }
+}
     </>
   )
 }

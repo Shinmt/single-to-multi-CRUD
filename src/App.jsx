@@ -83,16 +83,16 @@ function App() {
       return;
     }
 
+    // eslint-disable-next-line no-unused-vars
     const deletePromises = checked.map((id) => 
       axios.delete(`https://651cc91935bd4107e3731d66.mockapi.io/svt/${id}`)
-    );
 
-    Promise.all(deletePromises)
+    // Promise.all(deletePromises)
     .then(() => {
       getEmployee();
-      setChecked([]);
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err)));
+    setChecked([]);
   }
 
   //Update all using checkbox ids

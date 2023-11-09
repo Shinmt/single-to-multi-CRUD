@@ -69,10 +69,13 @@ const Create = ({getEmployee, hideCreateForm}) => {
 
   return (
     <div className=" flex flex-col justify-center items-center">
-        <button onClick={(e) => handleSubmitAll(e)}
-        className=" btn text-yellow-500 hover:bg-yellow-900"
-        ><BsCloudUpload /></button>
+        { countForm > 1 
+        ?  <button onClick={(e) => handleSubmitAll(e)}
+            className=" btn text-yellow-500 hover:bg-yellow-900"
+            ><BsCloudUpload /></button>
+        : null }
 
+    <div className=' flex flex-row justify-between items-center'>
     { Array.from({length : countForm}, (_, index) => (
     
     <div key={index} 
@@ -142,6 +145,7 @@ const Create = ({getEmployee, hideCreateForm}) => {
     
     
     }
+    </div>
     </div>
   )
 }

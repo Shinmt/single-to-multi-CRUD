@@ -15,8 +15,8 @@ const Update = ({updateEmployee, setUpdateEmployee, getEmployee, setShowUpdateFo
         job: updateEmployee.job
       })
       .then(() =>{
-        getEmployee()
-        setShowUpdateForm(false)
+        getEmployee();
+        setShowUpdateForm(false);
       })
       .catch(err => console.log(err))
     }
