@@ -5,6 +5,7 @@ import Employee from './Components/Employee'
 import Create from './Components/Create'
 import Update from './Components/Update'
 import BulkUpdate from './Components/BulkUpdate'
+import backgroundImage from '/background.png'
 
 function App() {
 
@@ -129,7 +130,8 @@ function App() {
   const showButton = !showUpdateForm && !showCreate && !showBulkUpdateForm
 
   return (
-    <div className='w-full h-full'>
+    <div className=' w-full h-full bg-cover' 
+    style={{ backgroundImage: `url(${backgroundImage})`}}>
       <h1 className=' text-black hover:text-zinc-500 font-bold text-3xl font-mono mb-4 text-center items-center'>Pledis Ent.</h1>
       { showButton &&
         <div className=' flex flex-row justify-center items-center'>
@@ -178,6 +180,7 @@ function App() {
       bulkUpdateEmployee={bulkUpdateEmployee}
       setBulkUpdateEmployee={setBulkUpdateEmployee}
       checked={checked}
+      setChecked={setChecked}
       getEmployee={getEmployee}
       setShowBulkUpdateForm={setShowBulkUpdateForm}
       />

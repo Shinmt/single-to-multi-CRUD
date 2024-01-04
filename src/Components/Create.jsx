@@ -75,13 +75,13 @@ const Create = ({getEmployee, hideCreateForm}) => {
             ><BsCloudUpload /></button>
         : null }
 
-    <div className=' flex flex-row justify-between items-center'>
+    <div className='Container-loop'>
     { Array.from({length : countForm}, (_, index) => (
     
     <div key={index} 
     className=" container ">
     <div
-    className=" grid grid-flow-col w-52 mt-2 bg-white rounded-lg mx-4 font-mono border border-black">
+    className=" grid grid-flow-col w-52 mt-2 bg-transparent rounded-lg mx-4 font-mono border border-black">
     <form 
     className="space-y-6" 
     action="#" 

@@ -8,7 +8,7 @@ const Employee = ({employee, handleDelete, handleUpdateForm, checked, handleChec
 
     return (
     <>
-    <div className="relative w-full max-w-sm bg-white rounded-lg border border-black mx-2 hover:bg-gray-200">
+    <div className="relative w-full max-w-sm bg-transparent rounded-lg border border-black mx-2 hover:bg-gray-200">
         <input
         type="checkbox"
         name="checked"

@@ -4,7 +4,7 @@ import {BiSave} from 'react-icons/bi'
 import {MdCancelPresentation} from 'react-icons/md'
 
 // eslint-disable-next-line react/prop-types
-const BulkUpdate = ({ bulkUpdateEmployee, setBulkUpdateEmployee, checked, getEmployee, setShowBulkUpdateForm }) => {
+const BulkUpdate = ({ bulkUpdateEmployee, setBulkUpdateEmployee, checked, setChecked, getEmployee, setShowBulkUpdateForm }) => {
 
     const handleInputChange = (e) => {
         const { id, name, value} = e.target;
@@ -20,7 +20,8 @@ const BulkUpdate = ({ bulkUpdateEmployee, setBulkUpdateEmployee, checked, getEmp
 
     function handleCancelAllForm (e) {
         e.preventDefault()
-        setShowBulkUpdateForm(false)
+        setShowBulkUpdateForm(false);
+        setChecked([]);
     }
 
     async function handleUpdateAllForm(e) {
@@ -58,7 +59,8 @@ const BulkUpdate = ({ bulkUpdateEmployee, setBulkUpdateEmployee, checked, getEmp
             </button>
         </div>
     </div>
-
+    
+    <div className='Container-loop'>
     { Array.from({length: checked.length}, (_, index) => (
         
         <div key={index}
@@ -114,6 +116,7 @@ const BulkUpdate = ({ bulkUpdateEmployee, setBulkUpdateEmployee, checked, getEmp
         </div>
     )) 
 }
+</div>
     </>
   )
 }
